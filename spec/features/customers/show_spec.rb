@@ -29,7 +29,7 @@ RSpec.describe "Customer Show Page", type: :feature do
     visit "customers/#{@customer_1.id}"
 
     within("#customer-#{@customer_1.id}") do
-    expect(page).to have_content("Name: Hudson Brand")
+    expect(page).to have_content("Name: #{@customer_1.name}")
     end 
   end
 
@@ -39,10 +39,38 @@ RSpec.describe "Customer Show Page", type: :feature do
       visit "customers/#{@customer_1.id}"
 
       within("#customer-#{@customer_1.id}") do
-      expect(page).to have_content("Item Name: Bananas, Cost: 2, Location: Cody's Goods")
-      expect(page).to have_content("Item Name: Shrimp, Cost: 18, Location: Safeway")
-      expect(page).to have_content("Item Name: Crackers, Cost: 4, Location: Safeway")
-      expect(page).to have_no_content("Item Name: Salmon, Cost: 25, Location: Cody's Goods")
+      expect(page).to have_content("Item Name: #{@item_1.name}, Price: #{@item_1.price}, Location: #{@item_1.supermarket[:name]}")
+      expect(page).to have_content("Item Name: #{@item_2.name}, Price: #{@item_2.price}, Location: #{@item_2.supermarket[:name]}")
+      expect(page).to have_content("Item Name: #{@item_3.name}, Price: #{@item_3.price}, Location: #{@item_3.supermarket[:name]}")
+      expect(page).to have_no_content("Item Name: #{@item_5.name}, Price: #{@item_5.price}, Location: #{@item_5.supermarket[:name]}")
+      end
+  end
+
+  it "has a form to add an item to this customer" do
+
+    visit "customers/#{@customer_1.id}"
+
+    have_selector?("form")
+    expect(page).to have_button("Submit")
+  end
+
+  it "when user fills in a field with the id of an exisiting item, and clicks submit, they are 
+    redirected back to the customer's show page, and the item is now listed under this customers
+    items" do
+
+      visit "/customers/#{@customer_1.id}"
+
+      within("#customer-#{@customer_1.id}") do
+      expect(page).to have_no_content("Item Name: #{@item_4.name}, Price: #{@item_4.price}, Location: #{@item_4.supermarket[:name]}")
+      end
+
+      fill_in :item_id, with: "#{@item_4.id}"
+      click_on "Submit"
+
+      expect(current_path).to eq("/customers/#{@customer_1.id}")
+
+      within("#customer-#{@customer_1.id}") do
+      expect(page).to have_content("Item Name: #{@item_4.name}, Price: #{@item_4.price}, Location: #{@item_4.supermarket[:name]}")
       end
   end
 end
