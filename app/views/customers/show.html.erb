@@ -1,7 +1,7 @@
 <section id="customer-<%= @customer.id%>">
 <p> Name: <%= @customer.name %></p>
 <% @customer.customer_items.each do |item| %></p>
-<p> Item Name: <%= item.name %>, Price: <%= item.price %>, Location: <%= item.supermarket[:name] %></p>
+<p> Item Name: <%= item.name %>, Price: <%= item.price %>, Location: <%= item.supermarket[:name]%></p>
 <% end %>
 </section>
 <br>

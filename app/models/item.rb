@@ -4,7 +4,7 @@ class Item < ApplicationRecord
   has_many :customer_items
   has_many :customers, through: :customer_items
 
-  # def supermarket_name
-  #   supermarket[:name]
-  # end
+  def purchase_count(id_of_item)
+    @purchased = CustomerItem.where(item_id: id_of_item).count
+  end
 end

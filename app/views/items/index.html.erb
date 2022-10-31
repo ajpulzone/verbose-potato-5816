@@ -1,0 +1,5 @@
+<h1> Items </h1>
+
+<% @items.each do |item| %></p>
+<p> Item Name: <%= item.name %>, Price: <%= item.price %>, Location: <%= item.supermarket[:name]%>, Quantity Purchased: <%= item.purchase_count(item.id) %></p>
+<% end %>
