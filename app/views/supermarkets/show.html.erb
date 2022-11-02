@@ -1,0 +1,10 @@
+<h2><%= @supermarket.name %></h2>
+
+<ul id="supermarket-<%= @supermarket.id %>">
+  <p>People who shop at <%= @supermarket.name %>:</p>
+    <% @supermarket.unique_customers.each do |customer| %>
+  <li>
+   <%= customer.name %>>
+  </li>
+<% end %>
+</ul>

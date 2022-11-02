@@ -17,10 +17,10 @@ RSpec.describe "Items Index Page", type: :feature do
     @customer_item_2 = CustomerItem.create!(customer: @customer_1, item: @item_2)
     @customer_item_3 = CustomerItem.create!(customer: @customer_1, item: @item_3)
     @customer_item_4 = CustomerItem.create!(customer: @customer_2, item: @item_1)
-    @customer_item_4 = CustomerItem.create!(customer: @customer_2, item: @item_4)
-    @customer_item_5 = CustomerItem.create!(customer: @customer_3, item: @item_5)
-    @customer_item_5 = CustomerItem.create!(customer: @customer_3, item: @item_2)
-    @customer_item_5 = CustomerItem.create!(customer: @customer_3, item: @item_3)
+    @customer_item_5 = CustomerItem.create!(customer: @customer_2, item: @item_4)
+    @customer_item_6 = CustomerItem.create!(customer: @customer_3, item: @item_5)
+    @customer_item_7 = CustomerItem.create!(customer: @customer_3, item: @item_2)
+    @customer_item_8 = CustomerItem.create!(customer: @customer_3, item: @item_3)
   end
 
   it "when a user visits the items index page, they see a list of all the items including
@@ -29,13 +29,11 @@ RSpec.describe "Items Index Page", type: :feature do
 
       visit "/items"
 
-      save_and_open_page
-      
-      expect(page).to have_content("Item Name: #{@item_1.name}, Price: #{@item_1.price}, Location: #{@item_1.supermarket[:name]}, Quantity Purchased: #{@item_1.purchase_count(@item_1.id)}")
-      expect(page).to have_content("Item Name: #{@item_2.name}, Price: #{@item_2.price}, Location: #{@item_2.supermarket[:name]}, Quantity Purchased: #{@item_2.purchase_count(@item_2.id)}")
-      expect(page).to have_content("Item Name: #{@item_3.name}, Price: #{@item_3.price}, Location: #{@item_3.supermarket[:name]}, Quantity Purchased: #{@item_3.purchase_count(@item_3.id)}")
-      expect(page).to have_content("Item Name: #{@item_4.name}, Price: #{@item_4.price}, Location: #{@item_4.supermarket[:name]}, Quantity Purchased: #{@item_4.purchase_count(@item_4.id)}")
-      expect(page).to have_content("Item Name: #{@item_5.name}, Price: #{@item_5.price}, Location: #{@item_5.supermarket[:name]}, Quantity Purchased: #{@item_5.purchase_count(@item_5.id)}")
+      expect(page).to have_content("Item Name: #{@item_1.name}, Price: #{@item_1.price}, Location: #{@item_1.supermarket[:name]}, Quantity Purchased: #{@item_1.purchase_count}")
+      expect(page).to have_content("Item Name: #{@item_2.name}, Price: #{@item_2.price}, Location: #{@item_2.supermarket[:name]}, Quantity Purchased: #{@item_2.purchase_count}")
+      expect(page).to have_content("Item Name: #{@item_3.name}, Price: #{@item_3.price}, Location: #{@item_3.supermarket[:name]}, Quantity Purchased: #{@item_3.purchase_count}")
+      expect(page).to have_content("Item Name: #{@item_4.name}, Price: #{@item_4.price}, Location: #{@item_4.supermarket[:name]}, Quantity Purchased: #{@item_4.purchase_count}")
+      expect(page).to have_content("Item Name: #{@item_5.name}, Price: #{@item_5.price}, Location: #{@item_5.supermarket[:name]}, Quantity Purchased: #{@item_5.purchase_count}")
       
     end
 end

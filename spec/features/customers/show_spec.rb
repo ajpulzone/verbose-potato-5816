@@ -50,7 +50,7 @@ RSpec.describe "Customer Show Page", type: :feature do
 
     visit "customers/#{@customer_1.id}"
 
-    have_selector?("form")
+    expect(page).to have_field(:item_id)
     expect(page).to have_button("Submit")
   end
 
@@ -61,7 +61,7 @@ RSpec.describe "Customer Show Page", type: :feature do
       visit "/customers/#{@customer_1.id}"
 
       within("#customer-#{@customer_1.id}") do
-      expect(page).to have_no_content("Item Name: #{@item_4.name}, Price: #{@item_4.price}, Location: #{@item_4.supermarket[:name]}")
+      expect(page).to have_no_content("Item Name: #{@item_4.name}, Price: #{@item_4.price}, Location: #{@item_4.supermarket.name}")
       end
 
       fill_in :item_id, with: "#{@item_4.id}"
@@ -70,7 +70,7 @@ RSpec.describe "Customer Show Page", type: :feature do
       expect(current_path).to eq("/customers/#{@customer_1.id}")
 
       within("#customer-#{@customer_1.id}") do
-      expect(page).to have_content("Item Name: #{@item_4.name}, Price: #{@item_4.price}, Location: #{@item_4.supermarket[:name]}")
+      expect(page).to have_content("Item Name: #{@item_4.name}, Price: #{@item_4.price}, Location: #{@item_4.supermarket.name}")
       end
   end
 end

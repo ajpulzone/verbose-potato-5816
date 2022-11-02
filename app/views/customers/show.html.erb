@@ -1,12 +1,12 @@
 <section id="customer-<%= @customer.id%>">
 <p> Name: <%= @customer.name %></p>
-<% @customer.customer_items.each do |item| %></p>
-<p> Item Name: <%= item.name %>, Price: <%= item.price %>, Location: <%= item.supermarket[:name]%></p>
+<% @customer.items.each do |item| %></p>
+<p> Item Name: <%= item.name %>, Price: <%= item.price %>, Location: <%= item.supermarket.name%></p>
 <% end %>
 </section>
 <br>
 
-<%= form_with url:"/customer_items/#{@customer.id}", method: :post, local: true do |form| %>
+<%= form_with url:"/customers/#{@customer.id}/items", method: :post, local: true do |form| %>
 <p>Add a new item:</p>
   <%= form.number_field :item_id %>
   <%= form.label :item_id, "Item ID" %>
